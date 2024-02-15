@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temperature converter</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <style>
+    *{
+      padding: 0%;
+      margin: 0%;
+      box-sizing: border-box;
+    }
+    html,body{
+      height: 100%;
+      width: 100%;
+      background-color: #596756;
+    }
+    h1{
+      text-align: center;
+      font-size: 40px;
+      color: #2ae40a;
+      font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+    }
+    #main{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid black;
+      background:#fff;
+      height: 160px;
+      width: 550px;
+      margin-left: 30%;
+      margin-top:10px;
+      border-radius: 15px;
+    }
+   #cel{
+    height: 30px;
+   }
+   #fah{
+    height: 30px;
+   }
+  </style>
+</head>
+<body>
+  <h1>Temperature Converter </h1>
+  <div id="main">
+    <div id="div-cel">
+      <input type="number" placeholder="celcius" id="cel" class="inp">
+    </div>
+    <div id="icon"><span class="material-symbols-outlined">
+      equal
+      </span></div>
+      <div id="fahrenheit">
+        <input type="number" placeholder="fahrenheit" id="fah" class="inp">
+      </div>
+  </div>
+  <script>
+    let cel = document.getElementById('cel');
+    let fah = document.getElementById('fah');
+    // Retrieve the values from localStorage if they exist
+    let storedCel = localStorage.getItem('cel');
+    let storedFah = localStorage.getItem('fah');
+
+    // Set the input values if they were stored
+    if (storedCel) cel.value = storedCel;
+    if (storedFah) fah.value = storedFah;
+    cel.addEventListener('input',function(){
+      localStorage.setItem('cel', this.value);
+      let c = this.value;
+      let f = (c * 9/5)+32;
+      if(!Number.isInteger(f)){
+        f = f.toFixed(4)
+      }
+      fah.value = f;
+    })
+    fah.addEventListener('input',function(){
+      localStorage.setItem('fah', this.value);
+      let f = this.value;
+      let c = (f-32)*5/9;
+      if(!Number.isInteger(c)){
+        c = c.toFixed(4);
+      }
+      cel.value = c;
+    })
+  </script>
+</body>
+</html>
